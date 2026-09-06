@@ -1,0 +1,17 @@
+http://localhost:8080/tomcat-k8s-demo/hello
+http://127.0.0.1:50076/tomcat-k8s-demo/hello
+
+mvn clean package
+
+docker build -t tomcat-k8s-demo:latest .
+
+minikube image load tomcat-k8s-demo:latest
+
+kubectl rollout restart deployment tomcat-k8s-demo
+
+kubectl get pods
+
+kubectl port-forward svc/tomcat-k8s-demo 8080:8080
+
+
+kubectl get deployment tomcat-k8s-demo -o jsonpath="{.spec.template.spec.containers[0].image}"
