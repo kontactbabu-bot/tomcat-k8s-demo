@@ -1,0 +1,27 @@
+name: CI - Build Tomcat Application
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '8'
+          cache: maven
+
+      - name: Build WAR
+        run: mvn clean package
+
+      - name: Build Docker image
+        run: docker build -t tomcat-k8s-demo:${{ github.sha }} .
