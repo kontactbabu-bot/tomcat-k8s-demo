@@ -18,7 +18,7 @@ public class HelloServlet extends HttpServlet {
         response.setContentType("text/plain");
 
         response.getWriter().println(
-            "Hello from Tomcat running in Kubernetes! Nice"
+            "Hello from GitHub CI/CD - Version 2!"
         );
     }
 }
